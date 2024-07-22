@@ -1,0 +1,24 @@
+---
+sap_hana_sid: RHE
+sap_hana_instance_number: "01"
+sap_hana_install_master_password: R3dh4t123!
+sap_domain: example.com
+ansible_chassis_asset_tag: na # For workaround
+sap_hana_cluster_nodes:
+  - node_name: hana-{{ fqdn.stdout }}1
+    node_ip: "{{ hana1ip.stdout }}"
+    node_role: primary
+    hana_site: DC01
+
+  - node_name: hana-{{ fqdn.stdout }}2
+    node_ip: "{{ hana2ip.stdout }}"
+    node_role: secondary
+    hana_site: DC02
+
+sap_hana_vip:
+  primary: "192.168.47.100"
+ha_cluster_cluster_name: hana-cluster
+ha_cluster_hacluster_password: Mysecretpassword
+sap_ha_pacemaker_cluster_system_roles_collection: redhat.rhel_system_roles
+sap_ha_pacemaker_cluster_cluster_properties:
+  stonith-enabled: false

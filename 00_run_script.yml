@@ -1,0 +1,60 @@
+---
+- name: customize Parent Playbooks
+  hosts: localhost
+
+  tasks:
+  - name: Set FQDN
+    shell: uname -n | cut -c 9-13
+    register : fqdn
+
+  - name: Set IP for HANA1
+    shell: nslookup hana-{{ fqdn.stdout }}1 |grep 192|cut -f 2 -d " "
+    register : hana1ip
+
+  - name: Set IP for HANA2
+    shell: nslookup hana-{{ fqdn.stdout }}2 |grep 192|cut -f 2 -d " "
+    register : hana2ip
+
+  - name: Prepare hanas in group_vars
+    template:
+      src: /home/cloud-user/hanaworkshop-2023/temp/hanas
+      dest: /home/cloud-user/hanaworkshop-2023/group_vars/hanas
+
+  - name: Prepare s4hana deploy playbook
+    template:
+      src: /home/cloud-user/hanaworkshop-2023/temp/05_s4hana_deploy.yml
+      dest: /home/cloud-user/hanaworkshop-2023/s4-ap/05_s4hana_deploy.yml
+
+  - name: Delete DEPRECATION WARNING
+    lineinfile:
+      path: /etc/ansible/ansible.cfg
+      regexp: '^#deprecation_warnings = True'
+      line: 'deprecation_warnings = False'
+    become: true
+
+- name: Transfer and execute a script.
+  hosts: sap
+
+  tasks:
+  - name: Transfer the script
+    copy:
+      src: /home/cloud-user/hanaworkshop-2023/pkg_fix.sh
+      dest: /home/cloud-user
+      mode: 0777
+
+  - name: Execute the script
+    command: sh /home/cloud-user/pkg_fix.sh
+
+- name: Prepare media
+  hosts: hanas
+
+  tasks:
+  - name: Copy install media
+    copy:
+      src: /nfs/HANA_installation/
+      dest: /media
+
+  - name: Copy SAPCAR
+    copy:
+      src: /nfs/SAPCAR/SAPCAR_1311-80000935.EXE
+      dest: /media

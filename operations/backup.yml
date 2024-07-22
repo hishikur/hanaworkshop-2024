@@ -1,0 +1,40 @@
+---
+- name: Backup
+  hosts: hana-qlx4m1
+  become: yes
+  become_user: rheadm
+
+  tasks:
+  - name: Fetch the binary path of the hdbsql
+    sap.sap_operations.parameter_info:
+      instance_number: "00"
+      #      name: DIR_INSTANCE
+      name: DIR_LIBRARY
+    register: dir_instance
+
+  - name: debgu
+    debug:
+      msg: "{{ dir_instance }}"
+
+  - name: Create a full HANA backup for SYSTEMDB
+    sap.sap_operations.hana_backup:
+      database_user_password: R3dh4t123!
+      prefix: MONDAY2
+      database_name: SYSTEMDB
+      binary_path: "{{ dir_instance.parameter_value | first }}"
+
+  - name: Create a full HANA backup for RHE tenant
+    sap.sap_operations.hana_backup:
+      database_user_password: R3dh4t123!
+      prefix: MONDAY2
+      binary_path: "{{ dir_instance.parameter_value | first }}"
+
+  - name: Create a full HANA backup for RHE tenant - all options used
+    sap.sap_operations.hana_backup:
+      database_user_password: R3dh4t123!
+      database_name: RHE
+      prefix: MONDAY2
+      destination: /backups
+      comment: Created with ansible
+      binary_path: "{{ dir_instance.parameter_value | first }}"
+      wait: false

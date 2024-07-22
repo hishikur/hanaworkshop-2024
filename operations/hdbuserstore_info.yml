@@ -1,0 +1,15 @@
+---
+- name: Backup
+  hosts: hana-qlx4m1
+
+  tasks:
+  - name: Get info about the key mykey from HDB user store
+    sap.sap_operations.hdbuserstore_info:
+      binary_path: /usr/sap/RHE/HDB00/exe
+      key: RHESAPDBCTRLRHE
+    register: output
+    become: yes
+    become_user: rheadm
+  - name: debug var
+    debug:
+      msg: "{{ output }}"

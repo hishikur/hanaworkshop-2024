@@ -1,0 +1,26 @@
+---
+- name: Create filesystem for SAP HANA
+  hosts: s4hanas
+
+  vars:
+    storage_pools:
+      - name: sap
+        disks:
+          - sdb
+        volumes:
+          - name: sap
+            size: "50 GiB"
+            mount_point: "/usr/sap"
+            state: present
+          - name: sapmnt
+            size: "20 GiB"
+            mount_point: "/usr/sapmnt"
+            state: present
+          - name: swap
+            fs_type: swap
+            size: "21 GiB"
+            state: present
+
+
+  roles:
+    - rhel-system-roles.storage

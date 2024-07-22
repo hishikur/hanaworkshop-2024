@@ -1,0 +1,32 @@
+---
+- hosts: hanas
+
+  tasks:
+  - name: unregister
+    redhat_subscription:
+      state: "absent"
+
+  - name: clean
+    action: command subscription-manager clean
+
+  - name: re-register
+    action: command subscription-manager register --org=7728826 --activationkey=37fc --force
+
+  - name: Disable all repos
+    action: command subscription-manager repos --disable="*"
+    
+  - name: Set release lock
+    aciton:  subscription-manager release --set=8.4
+
+  - name: enable SAP repos
+    action: command subscription-manager repos --enable=rhel-8-for-x86_64-baseos-e4s-rpms --enable=rhel-8-for-x86_64-appstream-e4s-rpms --enable=rhel-8-for-x86_64-sap-solutions-e4s-rpms
+
+
+
+#  vars:
+#    sap_rhsm_server_hostname: ''
+#    sap_rhsm_org_id: '7728826'
+#    rhsm_activationkey: '37fc'
+
+#  roles:
+#    - redhat_sap.sap_rhsm

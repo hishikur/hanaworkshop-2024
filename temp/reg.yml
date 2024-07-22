@@ -1,0 +1,20 @@
+#No need for this file
+---
+- hosts: hanas
+
+  tasks:
+ 
+  - name: Remove katello
+    yum:
+      name: katello-ca-consumer-labsat.opentlc.com
+      state: absent
+  
+  - name: unregister
+    redhat_subscription:
+      state: "absent"
+
+  - name: clean
+    action: command subscription-manager clean
+
+  - name: re-register
+    action: command subscription-manager register --org=7728826 --activationkey=37fc --force

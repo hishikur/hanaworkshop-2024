@@ -1,0 +1,13 @@
+---
+- name: Install SAP HANA Database
+  hosts: hanas
+
+  vars:
+    sap_hana_install_software_directory: /media
+    sap_hana_install_common_master_password: R3dh4t123!
+    sap_hana_install_root_password: mysecretpassword
+    sap_hana_install_sid: RHE
+    sap_hana_install_instance_number: "01"
+
+  roles:
+    - sap_hana_install

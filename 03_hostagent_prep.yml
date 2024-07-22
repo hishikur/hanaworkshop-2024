@@ -1,0 +1,16 @@
+---
+- name: Host Agent installation
+  hosts: hanas
+  become: yes
+  collections:
+    - community.sap_install
+
+  vars:
+    sap_hostagent_installation_type: rpm
+    sap_hostagent_rpm_local_path: /nfs/SAPHOSTAGENT
+    sap_hostagent_rpm_file_name: saphostagentrpm_44-20009394.rpm
+    sap_hostagent_clean_tmp_directory: true
+
+  roles:
+    - sap_hostagent
+
