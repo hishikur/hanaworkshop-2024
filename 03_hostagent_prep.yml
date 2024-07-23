@@ -7,7 +7,7 @@
 
   vars:
     sap_hostagent_installation_type: rpm
-    sap_hostagent_rpm_local_path: /software/SAPHOSTAGENT
+    sap_hostagent_rpm_local_path: /nfs/SAPHOSTAGENT
     sap_hostagent_rpm_file_name: saphostagentrpm_44-20009394.rpm
     sap_hostagent_clean_tmp_directory: true
 
