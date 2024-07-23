@@ -17,13 +17,13 @@
 
   - name: Prepare hanas in group_vars
     template:
-      src: /home/cloud-user/hanaworkshop-2023/temp/hanas
-      dest: /home/cloud-user/hanaworkshop-2023/group_vars/hanas
+      src: /root/hanaworkshop-2024/temp/hanas
+      dest: /root/hanaworkshop-2024/group_vars/hanas
 
   - name: Prepare s4hana deploy playbook
     template:
-      src: /home/cloud-user/hanaworkshop-2023/temp/05_s4hana_deploy.yml
-      dest: /home/cloud-user/hanaworkshop-2023/s4-ap/05_s4hana_deploy.yml
+      src: /root/hanaworkshop-2024/temp/05_s4hana_deploy.yml
+      dest: /root/hanaworkshop-2024/s4-ap/05_s4hana_deploy.yml
 
   - name: Delete DEPRECATION WARNING
     lineinfile:
@@ -38,7 +38,7 @@
   tasks:
   - name: Transfer the script
     copy:
-      src: /home/cloud-user/hanaworkshop-2023/pkg_fix.sh
+      src: /root/hanaworkshop-2024/pkg_fix.sh
       dest: /home/cloud-user
       mode: 0777
 
