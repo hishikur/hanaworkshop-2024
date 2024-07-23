@@ -1,32 +1,34 @@
 ---
-- name: customize Parent Playbooks
+- name: Customize Parent Playbooks
   hosts: localhost
 
   tasks:
   - name: Set FQDN
-    shell: uname -n | cut -c 9-13
+    ansible.builtin.shell: uname -n | cut -c 9-13
     register : fqdn
 
   - name: Set IP for HANA1
-    shell: nslookup hana-{{ fqdn.stdout }}1 |grep 192|cut -f 2 -d " "
+    ansible.builtin.shell: nslookup hana-{{ fqdn.stdout }}1 |grep 192|cut -f 2 -d " "
     register : hana1ip
 
   - name: Set IP for HANA2
-    shell: nslookup hana-{{ fqdn.stdout }}2 |grep 192|cut -f 2 -d " "
+    ansible.builtin.shell: nslookup hana-{{ fqdn.stdout }}2 |grep 192|cut -f 2 -d " "
     register : hana2ip
 
   - name: Prepare hanas in group_vars
-    template:
+    ansible.builtin.template:
       src: /root/hanaworkshop-2024/temp/hanas
       dest: /root/hanaworkshop-2024/group_vars/hanas
+      mode: '0644'
 
   - name: Prepare s4hana deploy playbook
-    template:
+    ansible.builtin.template:
       src: /root/hanaworkshop-2024/temp/05_s4hana_deploy.yml
       dest: /root/hanaworkshop-2024/s4-ap/05_s4hana_deploy.yml
+      mode: '0644'
 
   - name: Delete DEPRECATION WARNING
-    lineinfile:
+    ansible.builtin.lineinfile:
       path: /etc/ansible/ansible.cfg
       regexp: '^#deprecation_warnings = True'
       line: 'deprecation_warnings = False'
@@ -36,11 +38,11 @@
   hosts: sap
 
   tasks:
-  - name: Transfer the script
-    copy:
-      src: /root/hanaworkshop-2024/pkg_fix.sh
-      dest: /home/cloud-user
-      mode: 0777
+    - name: Transfer the script
+      ansible.builtin.copy:
+        src: /root/hanaworkshop-2024/pkg_fix.sh
+        dest: /home/cloud-user
+        mode: 0777
 
-  - name: Execute the script
-    command: sh /home/cloud-user/pkg_fix.sh
+    - name: Execute the script
+      ansible.builtin.command: sh /home/cloud-user/pkg_fix.sh
