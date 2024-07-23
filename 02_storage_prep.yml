@@ -6,7 +6,7 @@
     storage_pools:
       - name: sap
         disks:
-          - vda3
+          - vdb
         volumes:
           - name: data
             size: "128 GiB"
