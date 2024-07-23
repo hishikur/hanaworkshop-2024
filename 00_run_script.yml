@@ -44,17 +44,3 @@
 
   - name: Execute the script
     command: sh /home/cloud-user/pkg_fix.sh
-
-- name: Prepare media
-  hosts: hanas
-
-  tasks:
-  - name: Copy install media
-    copy:
-      src: /nfs/HANA_installation/
-      dest: /media
-
-  - name: Copy SAPCAR
-    copy:
-      src: /nfs/SAPCAR/SAPCAR_1311-80000935.EXE
-      dest: /media
