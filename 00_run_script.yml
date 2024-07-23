@@ -42,7 +42,7 @@
       ansible.builtin.copy:
         src: /root/hanaworkshop-2024/pkg_fix.sh
         dest: /home/cloud-user
-        mode: 0777
+        mode: '0777'
 
     - name: Execute the script
       ansible.builtin.command: sh /home/cloud-user/pkg_fix.sh
