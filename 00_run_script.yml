@@ -8,11 +8,11 @@
     register : fqdn
 
   - name: Set IP for HANA1
-    ansible.builtin.shell: host hana-{{ fqdn.stdout }}1 | cut -f 4 -d " "
+    ansible.builtin.shell: grep hana-{{ fqdn.stdout }}1 /etc/hosts | cut -f 1 -d " "
     register : hana1ip
 
   - name: Set IP for HANA2
-    ansible.builtin.shell: host hana-{{ fqdn.stdout }}2 | cut -f 4 -d " "
+    ansible.builtin.shell: grep hana-{{ fqdn.stdout }}2 /etc/hosts | cut -f 1 -d " "
     register : hana2ip
 
   - name: Prepare hanas in group_vars
