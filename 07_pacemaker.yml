@@ -3,4 +3,6 @@
   hosts: hanas
 
   roles:
+    - role: sap_ha_prepare_pacemaker
     - role: sap_ha_install_pacemaker
+    - role: sap_ha_set_hana

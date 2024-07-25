@@ -12,5 +12,5 @@
     sap_hostagent_clean_tmp_directory: true
 
   roles:
-    - sap_hostagent
+    - role: sap_hostagent
 

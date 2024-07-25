@@ -29,6 +29,6 @@
             state: present
 
   roles:
-    - rhel-system-roles.storage
+    - role: rhel-system-roles.storage
 
 

@@ -17,4 +17,4 @@
     #sap_hana_install_instance_number: "01"
 
   roles:
-    - sap_hana_install
+    - role: sap_hana_install

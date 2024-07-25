@@ -8,5 +8,5 @@
       - hostname: pool.ntp.org
 
   roles:
-    - rhel-system-roles.timesync
+    - role: rhel-system-roles.timesync
 
