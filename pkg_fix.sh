@@ -12,3 +12,8 @@ sudo yum remove katello-ca-consumer-labsat.opentlc.com -y
 sudo subscription-manager register --org=11594663 --activationkey=tempkey
 sudo subscription-manager release --set=8.6
 sudo insights-client --register
+sudo subscription-manager repos \
+--enable="rhel-8-for-$(uname -m)-baseos-e4s-rpms" \
+--enable="rhel-8-for-$(uname -m)-appstream-e4s-rpms" \
+--enable="rhel-8-for-$(uname -m)-sap-solutions-e4s-rpms" \
+--enable="rhel-8-for-$(uname -m)-sap-netweaver-e4s-rpms"
