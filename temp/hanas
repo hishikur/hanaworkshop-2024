@@ -1,6 +1,6 @@
 ---
 sap_hana_sid: RHE
-sap_hana_instance_number: "01"
+sap_hana_instance_number: "00"
 sap_hana_install_master_password: R3dh4t123!
 sap_domain: example.com
 ansible_chassis_asset_tag: na # For workaround
