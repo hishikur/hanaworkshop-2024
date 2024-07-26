@@ -3,7 +3,7 @@ sap_hana_sid: RHE
 sap_hana_instance_number: "01"
 sap_hana_install_master_password: R3dh4t123!
 sap_domain: example.com
-ansible_chassis_asset_tag: na # For workaround
+#ansible_chassis_asset_tag: na # For workaround
 sap_hana_cluster_nodes:
   - node_name: hana-{{ fqdn.stdout }}1
     node_ip: "{{ hana1ip.stdout }}"
@@ -15,18 +15,16 @@ sap_hana_cluster_nodes:
     node_role: secondary
     hana_site: DC02
 
-sap_hana_vip:
+sap_hana_vip1:
   primary: "192.168.47.100"
+sap_ha_pacemaker_cluster_hana_sid: RHE
 sap_hana_cluster_name: hana-cluster
 sap_hana_hacluster_password: Mysecretpassword
-sap_ha_pacemaker_cluster_host_type: hana_scaleup_perf #old
-ha_cluster_cluster_name: hana-cluster #old
-ha_cluster_hacluster_password: Mysecretpassword #old
 sap_ha_pacemaker_cluster_system_roles_collection: redhat.rhel_system_roles
-sap_ha_pacemaker_cluster_cluster_properties:
-  stonith-enabled: false
-sap_pacemaker_stonith_devices: 
-  - name: "fence_cnv"
-    agent: "fence_kubevirt"
-    credential: "nodename='hana-ctshd1'"
-    parameters: "pcmk_host_list='hana1,hana2' pcmk_reboot_action='off'"
+#sap_ha_pacemaker_cluster_cluster_properties:
+#  stonith-enabled: false
+#sap_pacemaker_stonith_devices: 
+#  - name: "fence_cnv"
+#    agent: "fence_kubevirt"
+#    credential: "nodename='hana-ctshd1'"
+#    parameters: "pcmk_host_list='hana1,hana2' pcmk_reboot_action='off'"

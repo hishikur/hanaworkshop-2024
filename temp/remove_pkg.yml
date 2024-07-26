@@ -1,8 +1,0 @@
----
-- hosts: hanas
-  tasks:
-  - name: Remove katello
-    yum:
-      name: katello-ca-consumer-labsat.opentlc.com
-      state: absent
-
