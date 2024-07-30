@@ -1,5 +1,7 @@
 #!/bin/bash
 
+export LANG=C
+
 ansible-playbook 00_run_script.yml
 sleep 5
 sudo yum install rhel-system-roles -y
