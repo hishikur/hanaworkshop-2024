@@ -3,18 +3,12 @@
   hosts: hanas
 
   vars:
-    sap_hana_install_software_directory: /software/HANA_installation
-    sap_hana_install_common_master_password: "R3dh4t123!"
-    sap_hana_install_sid: 'RHE'
-    sap_hana_install_instance_number: '00'
-    sap_hana_install_software_extract_directory: "/tmp/inst"
-    sap_hana_install_sapcar_filename: "../../../software/SAPCAR/SAPCAR_1311-80000935.EXE"
-
-    #sap_hana_install_software_directory: /media
-    #sap_hana_install_common_master_password: R3dh4t123!
-    #sap_hana_install_root_password: mysecretpassword
-    #sap_hana_install_sid: RHE
-    #sap_hana_install_instance_number: "01"
+#    sap_hana_install_software_directory: /software/HANA_installation
+#    sap_hana_install_common_master_password: "R3dh4t123!"
+#    sap_hana_install_sid: 'RHE'
+#    sap_hana_install_instance_number: '00'
+#    sap_hana_install_software_extract_directory: "/tmp/inst"
+ #   sap_hana_install_sapcar_filename: "../../../software/SAPCAR/SAPCAR_1311-80000935.EXE"
 
   roles:
     - role: sap_hana_install

@@ -8,8 +8,6 @@
     sap_hana_preconfigure_fail_if_reboot_required: no
     sap_hana_preconfigure_update: yes
     sap_general_preconfigure_enable_repos: yes
-  #  sap_general_preconfigure_assert: yes
-  #  sap_general_preconfigure_assert_ignore_errors: yes
     
   roles:
     - role: sap_general_preconfigure

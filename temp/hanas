@@ -1,8 +1,16 @@
 ---
-sap_hana_sid: "RHE"
-sap_hana_instance_number: "01"
-sap_hana_install_master_password: "R3dh4t123!"
+#sap_hana_sid: "RHE"
+#sap_hana_instance_number: "00"
 sap_domain: example.com
+sap_hana_install_software_directory: /software/HANA_installation
+sap_hana_install_common_master_password: "R3dh4t123!"
+sap_hana_install_sid: 'RHE'
+sap_hana_install_master_password: "R3dh4t123!"
+sap_hana_install_instance_number: '00'
+#sap_hana_deployment_sapcar_path": "/software/SAPCAR"
+sap_hana_install_software_extract_directory: "/tmp/inst"
+sap_hana_install_sapcar_filename: "../../../software/SAPCAR/SAPCAR_1311-80000935.EXE"
+
 #ansible_chassis_asset_tag: na # For workaround
 sap_hana_cluster_nodes:
   - node_name: hana-{{ fqdn.stdout }}1
