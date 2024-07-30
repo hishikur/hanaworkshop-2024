@@ -1,5 +1,5 @@
 ---
-#sap_hana_sid: "RHE"
+sap_hana_sid: 'RHE'
 #sap_hana_instance_number: "00"
 sap_domain: example.com
 sap_hana_install_software_directory: /software/HANA_installation
