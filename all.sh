@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export LANG=C
+export LANG=en_US.UTF-8
 
 ansible-playbook 00_run_script.yml
 sleep 5
