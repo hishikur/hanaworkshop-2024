@@ -23,8 +23,7 @@ sap_hana_cluster_nodes:
     node_role: secondary
     hana_site: DC02
 
-sap_hana_vip1:
-  primary: "192.168.47.100"
+sap_hana_vip1: "192.168.47.100"
 sap_ha_pacemaker_cluster_hana_sid: RHE
 sap_hana_cluster_name: hana-cluster
 sap_hana_hacluster_password: Mysecretpassword
