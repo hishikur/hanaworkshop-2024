@@ -1,5 +1,12 @@
 ---
-# Follow official documentation - https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html-single/configuring_rhel_8_for_sap_hana_2_installation/
+# 04_s4_sap_prep.yml - S/4HANA AP サーバー用 SAP 前提条件適用
+#
+# 参考: https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html-single/configuring_rhel_8_for_sap_hana_2_installation/
+#
+# HANA ノード用 (04_sap_prep.yml) との違い:
+#   - sap_hana_preconfigure の代わりに sap_netweaver_preconfigure を使用
+#   - NetWeaver / S/4HANA AP に必要なカーネルパラメータ・パッケージを適用
+
 - name: Apply SAP HANA Note
   hosts: s4hanas
 
@@ -8,7 +15,7 @@
     sap_hana_preconfigure_fail_if_reboot_required: no
     sap_hana_preconfigure_update: yes
     sap_general_preconfigure_enable_repos: yes
-    
+
   roles:
     - role: sap_general_preconfigure
     - role: sap_netweaver_preconfigure

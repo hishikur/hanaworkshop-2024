@@ -1,4 +1,9 @@
 ---
+# 05_s4hana_deploy.yml テンプレート (Jinja2)
+#
+# 00_run_script.yml で展開され s4-ap/05_s4hana_deploy.yml に出力される。
+# {{ fqdn.stdout }} が環境固有のホスト名に置換される。
+
 - name: Install SAP AP server
   hosts: s4hanas
 

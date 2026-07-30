@@ -1,14 +1,22 @@
 ---
+# backup.yml - SAP HANA フルバックアップ (運用タスク)
+#
+# sap.sap_operations コレクションを使用して HANA のフルバックアップを実行。
+# SYSTEMDB とテナント DB (RHE) の両方をバックアップする。
+#
+# 実行例: ansible-playbook operations/backup.yml
+# 注意: hosts を環境に合わせて変更すること (現在は hana-qlx4m1 固定)。
+
 - name: Backup
   hosts: hana-qlx4m1
   become: yes
   become_user: rheadm
 
   tasks:
+  # hdbsql のバイナリパスを動的に取得 (DIR_LIBRARY パラメータから)
   - name: Fetch the binary path of the hdbsql
     sap.sap_operations.parameter_info:
       instance_number: "00"
-      #      name: DIR_INSTANCE
       name: DIR_LIBRARY
     register: dir_instance
 
@@ -16,6 +24,7 @@
     debug:
       msg: "{{ dir_instance }}"
 
+  # SYSTEMDB のフルバックアップ
   - name: Create a full HANA backup for SYSTEMDB
     sap.sap_operations.hana_backup:
       database_user_password: R3dh4t123!
@@ -23,12 +32,14 @@
       database_name: SYSTEMDB
       binary_path: "{{ dir_instance.parameter_value | first }}"
 
+  # テナント DB (RHE) のフルバックアップ (デフォルト出力先)
   - name: Create a full HANA backup for RHE tenant
     sap.sap_operations.hana_backup:
       database_user_password: R3dh4t123!
       prefix: MONDAY2
       binary_path: "{{ dir_instance.parameter_value | first }}"
 
+  # テナント DB (RHE) のフルバックアップ (カスタム出力先、非同期)
   - name: Create a full HANA backup for RHE tenant - all options used
     sap.sap_operations.hana_backup:
       database_user_password: R3dh4t123!

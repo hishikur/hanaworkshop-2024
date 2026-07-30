@@ -1,4 +1,15 @@
 ---
+# 07_pacemaker.yml - Pacemaker HA クラスタ構成 (個別ロール版)
+#
+# 3つのロールを順次適用して HANA HA クラスタを構成する:
+#   1. sap_ha_prepare_pacemaker  - Pacemaker 前提パッケージと基本設定
+#   2. sap_ha_install_pacemaker  - Pacemaker クラスタの作成・起動
+#   3. sap_ha_set_hana           - HANA リソース (SAPHana/SAPHanaTopology) 登録
+#
+# 注意: STONITH/Fencing デバイスの設定を事前に確認すること。
+# all.sh ではコメントアウトされているため、準備完了後に手動実行する。
+# community.sap_install 統合版は 07_pacemaker.com.yml を参照。
+
 - name: Setting SAP HANA Database Pacemaker Cluster
   hosts: hanas
 

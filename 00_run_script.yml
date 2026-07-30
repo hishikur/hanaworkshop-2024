@@ -1,12 +1,23 @@
 ---
+# 00_run_script.yml - 環境固有の初期設定
+#
+# ホスト名から FQDN を動的に解決し、group_vars と S/4HANA Playbook を
+# テンプレートから生成する。また、全 SAP ホストに pkg_fix.sh を配布・実行して
+# RHSM を SAP 用 E4S リポジトリに切り替える。
+#
+# このPlaybookはall.shの最初に実行され、後続Playbookが参照する
+# group_vars/hanas を自動生成するため、必ず最初に実行すること。
+
 - name: Customize Parent Playbooks
   hosts: localhost
 
   tasks:
+  # ホスト名の9〜13文字目を環境識別子として抽出 (例: bastion-qlx4m → qlx4m)
   - name: Set FQDN
     ansible.builtin.shell: uname -n | cut -c 9-13
     register : fqdn
 
+  # /etc/hosts から HANA ノード1/2 の IP を取得
   - name: Set IP for HANA1
     ansible.builtin.shell: grep hana-{{ fqdn.stdout }}1 /etc/hosts | cut -f 1 -d " "
     register : hana1ip
@@ -15,12 +26,14 @@
     ansible.builtin.shell: grep hana-{{ fqdn.stdout }}2 /etc/hosts | cut -f 1 -d " "
     register : hana2ip
 
+  # テンプレートから group_vars/hanas を生成 (SID, IP, クラスタ構成等を展開)
   - name: Prepare hanas in group_vars
     ansible.builtin.template:
       src: /root/hanaworkshop-2024/temp/hanas
       dest: /root/hanaworkshop-2024/group_vars/hanas
       mode: '0644'
 
+  # S/4HANA デプロイ Playbook もテンプレートから生成 (DB ホスト名を動的に設定)
   - name: Prepare s4hana deploy playbook
     ansible.builtin.template:
       src: /root/hanaworkshop-2024/temp/05_s4hana_deploy.yml
@@ -34,6 +47,7 @@
       line: 'deprecation_warnings = False'
     become: true
 
+# 全 SAP ホストに pkg_fix.sh を配布し、RHSM を SAP 用 E4S リポジトリに切り替え
 - name: Transfer and execute a script.
   hosts: sap
 

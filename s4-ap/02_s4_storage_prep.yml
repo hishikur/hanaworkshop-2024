@@ -1,4 +1,11 @@
 ---
+# 02_s4_storage_prep.yml - S/4HANA アプリケーションサーバー用ストレージ準備
+#
+# sdb ディスクに LVM ボリュームグループを作成し、以下をマウント:
+#   /usr/sap    - SAP バイナリ (50 GiB)
+#   /usr/sapmnt - SAP マウントポイント (20 GiB)
+#   swap        - スワップ領域 (21 GiB)
+
 - name: Create filesystem for SAP HANA
   hosts: s4hanas
 

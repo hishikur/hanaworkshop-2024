@@ -1,4 +1,9 @@
 ---
+# 01_timesync_prep.yml - NTP 時刻同期設定
+#
+# SAP HANA は正確な時刻同期が必須 (System Replication や分散トランザクションの整合性)。
+# rhel-system-roles.timesync で全 SAP ホストの chronyd を設定する。
+
 - name: Prepare SAP HANA database installation
   hosts: sap
   become: yes

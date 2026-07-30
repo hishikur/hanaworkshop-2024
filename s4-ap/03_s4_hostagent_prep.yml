@@ -1,4 +1,9 @@
 ---
+# 03_s4_hostagent_prep.yml - S/4HANA AP サーバー用 SAP Host Agent インストール
+#
+# S/4HANA アプリケーションサーバー (s4hanas グループ) に Host Agent をインストール。
+# 03_hostagent_prep.yml と同様のパラメータで、対象ホストグループが異なる。
+
 - name: Host Agent installation
   hosts: s4hanas
   become: yes

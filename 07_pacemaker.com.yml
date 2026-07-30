@@ -1,4 +1,10 @@
 ---
+# 07_pacemaker.com.yml - Pacemaker HA クラスタ構成 (community.sap_install 統合版)
+#
+# community.sap_install の sap_ha_pacemaker_cluster ロールを使用。
+# 07_pacemaker.yml の3ロール分割版と同等の構成を単一ロールで実行する。
+# どちらか一方のみを使用すること。
+
 - name: Setting SAP HANA Database Pacemaker Cluster
   hosts: hanas
   collections:

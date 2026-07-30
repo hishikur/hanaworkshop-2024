@@ -1,4 +1,10 @@
 ---
+# 06_hsr.yml - HANA System Replication (HSR) 構成
+#
+# Primary (DC01) → Secondary (DC02) の同期レプリケーションを設定する。
+# ノード構成は group_vars/hanas の sap_hana_cluster_nodes で定義。
+# HSR が有効になると Secondary ノードがスタンバイとして稼働を開始する。
+
 - name: Setting for HANA System Replication
   hosts: hanas
 

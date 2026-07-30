@@ -1,4 +1,13 @@
 ---
+# group_vars/hanas テンプレート (Jinja2)
+#
+# 00_run_script.yml によって展開され group_vars/hanas に出力される。
+# {{ fqdn.stdout }} と {{ hana1ip.stdout }}/{{ hana2ip.stdout }} は
+# 実行時にホスト名と /etc/hosts から動的に解決される。
+#
+# このファイルを直接編集しても group_vars/hanas には反映されない。
+# 変更は 00_run_script.yml を再実行して反映すること。
+
 sap_hana_sid: 'RHE'
 sap_hana_instance_number: '00'
 sap_domain: example.com

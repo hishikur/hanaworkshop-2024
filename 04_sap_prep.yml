@@ -1,5 +1,15 @@
 ---
-# Follow official documentation - https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html-single/configuring_rhel_8_for_sap_hana_2_installation/
+# 04_sap_prep.yml - SAP HANA 前提条件の適用
+#
+# SAP Note に基づき RHEL を SAP HANA 用に最適化する。
+# 参考: https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html-single/configuring_rhel_8_for_sap_hana_2_installation/
+#
+# sap_general_preconfigure: 汎用 SAP 前提条件 (パッケージ、SELinux、tmpfiles 等)
+# sap_hana_preconfigure:    HANA 固有の設定 (カーネルパラメータ、THP 無効化、NUMA 等)
+#
+# fail_if_reboot_required: no — リブート未実施でも処理を続行する。
+# ワークショップ環境では一括実行後にまとめてリブートするため。
+
 - name: Apply SAP HANA Note
   hosts: hanas
 
@@ -8,7 +18,7 @@
     sap_hana_preconfigure_fail_if_reboot_required: no
     sap_hana_preconfigure_update: yes
     sap_general_preconfigure_enable_repos: yes
-    
+
   roles:
     - role: sap_general_preconfigure
     - role: sap_hana_preconfigure

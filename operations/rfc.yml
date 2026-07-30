@@ -1,4 +1,14 @@
 ---
+# rfc.yml - SAP RFC 接続テスト (運用タスク)
+#
+# community.sap_operations の sap_pyrfc ロールを使用し、
+# SAP S/4HANA への RFC 接続をテストする。
+# PyRFC (SAP NW RFC SDK の Python バインディング) が必要。
+#
+# テスト対象:
+#   STFC_CONNECTION - 基本的な RFC 接続確認 (ping 相当)
+#   STFC_STRUCTURE  - 構造体データの送受信テスト
+
 - name: RFC Connection to SAP
   hosts: localhost
   become: yes
@@ -20,6 +30,7 @@
 
   tasks:
 
+  # pyrfc_first_run: yes で初回に NW RFC SDK のインストールも実行
   - name: Run SAP RFC - STFC_CONNECTION
     vars:
       pyrfc_first_run: yes
@@ -29,12 +40,12 @@
       target_connection: "{{ reuse_connection }}"
     ansible.builtin.include_role:
       name: community.sap_operations.sap_pyrfc
-      #    register: sap_rfc_output1
 
   - name: DEBUG - Output of STFC_CONNECTION
     debug:
       msg: "{{ sap_rfc_output }}"
 
+  # pyrfc_first_run: no — 2回目以降は SDK インストールをスキップ
   - name: Run SAP RFC - STFC_STRUCTURE
     vars:
       pyrfc_first_run: no
@@ -47,7 +58,6 @@
       target_connection: "{{ reuse_connection }}"
     ansible.builtin.include_role:
       name: community.sap_operations.sap_pyrfc
-      #register: sap_rfc_output2
 
   - name: DEBUG - Output of STFC_STRUCTURE
     debug:

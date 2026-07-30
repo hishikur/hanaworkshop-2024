@@ -1,3 +1,9 @@
+---
+# list_ips.yml - 全ホストの IP アドレス一覧表示 (デバッグ・確認用)
+#
+# インベントリに登録された全ホストのデフォルト IPv4 アドレスを表示する。
+# ansible-playbook list_ips.yml で実行。
+
 - name: Test hosts list
   hosts: all
   tasks:

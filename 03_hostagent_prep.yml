@@ -1,4 +1,10 @@
 ---
+# 03_hostagent_prep.yml - SAP Host Agent インストール
+#
+# SAP Host Agent は HANA のライフサイクル管理に必要なエージェントサービス。
+# NFS 共有 (/nfs/SAPHOSTAGENT) に配置済みの RPM パッケージからインストールする。
+# community.sap_install コレクションの sap_hostagent ロールを使用。
+
 - name: Host Agent installation
   hosts: hanas
   become: yes

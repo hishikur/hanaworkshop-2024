@@ -1,4 +1,11 @@
 ---
+# 05_hana_deploy.yml - SAP HANA データベースインストール
+#
+# community.sap_install の sap_hana_install ロールで HANA をインストール。
+# インストールパラメータ (SID, インスタンス番号, パスワード, メディアパス等) は
+# group_vars/hanas で定義済み (00_run_script.yml でテンプレートから自動生成)。
+# 以下のコメントアウト変数は group_vars 側に移動済みのため、ここでは不要。
+
 - name: Install SAP HANA Database
   hosts: hanas
 

@@ -1,4 +1,14 @@
 ---
+# 02_storage_prep.yml - SAP HANA 用ファイルシステム作成
+#
+# vdb ディスク上に LVM ボリュームグループ "sap" を作成し、
+# SAP HANA に必要な4つのファイルシステムをマウントする。
+# サイズは SAP Note 2009879 の推奨に基づく。
+#   /hana/data   - データファイル (128 GiB, XFS)
+#   /hana/log    - ログファイル (64 GiB, XFS)
+#   /hana/shared - 共有ファイル (256 GiB, XFS)
+#   /usr/sap     - SAP バイナリ (50 GiB)
+
 - name: Create filesystem for SAP HANA
   hosts: hanas
 
